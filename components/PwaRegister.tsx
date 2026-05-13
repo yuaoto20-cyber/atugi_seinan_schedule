@@ -6,7 +6,8 @@ export function PwaRegister() {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-      navigator.serviceWorker.register(`${basePath}/sw.js`, { scope: `${basePath || "/"}` }).catch(() => {
+      const scope = basePath ? `${basePath}/` : "/";
+      navigator.serviceWorker.register(`${basePath}/sw.js`, { scope }).catch(() => {
         // PWA support is additive; the app remains usable without a worker.
       });
     }
